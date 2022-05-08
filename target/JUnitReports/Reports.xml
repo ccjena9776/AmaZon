@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="159.708">
+<testcase classname="Loading the Amazon website." name="User go to the Amazon website and search for the book." time="159.37">
+<system-out><![CDATA[Given User go to Google page................................................passed
+When User pass "Amazon" text option in the google search box................passed
+And User clicks on button button............................................passed
+Then User enter to the Amazon home page.....................................passed
+And User pass the book "The Lost World by Arthur Conan Doyle" in amazon search box.passed
+And User click on search button.............................................passed
+Then user go to the search reasult page and find the total books result.....passed
+When User change the language "French" using filter option..................passed
+Then User finds a different count for that particular book search...........passed
+]]></system-out>
+</testcase>
+</testsuite>

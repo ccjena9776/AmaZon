@@ -1,0 +1,7 @@
+GoogleSearchBox=//input[@class="gLFyf gsfi" and @name="q" and @type="text"]
+AmazonShopingWebsiteLink=//div[@id="tads"]/div/div/div/div/div[1]/a[@class]/div[1]/span
+AmazonSearchBox=//input[@type="text" and @id="twotabsearchtextbox"]
+AmazonSearchBoxButton=//input[@id="nav-search-submit-button" and @type="submit"]
+AmazonFirstBookResult=//div[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/div[2]/div/span/a/div/img
+TotalBooksResult=//img[@class="s-image" and @src and @alt]
+BookLanguageChangeSearch=//li[@id and @aria-label="French"]/span/a/div/label/input[@type="checkbox"]

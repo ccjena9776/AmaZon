@@ -1,0 +1,3 @@
+ChromeDriver=.\\DriversDetails\\chromedriver.exe
+URLGoogle=https://www.google.com
+URLDetails=Amazon
