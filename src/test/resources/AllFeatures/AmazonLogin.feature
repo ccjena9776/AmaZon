@@ -9,5 +9,5 @@ Feature: Loading the Amazon website.
     And User pass the book "The Lost World by Arthur Conan Doyle" in amazon search box
     And User click on search button
     Then user go to the search reasult page and find the total books result
-    When User change the language "French" using filter option
-    Then User finds a different count for that particular book search
+    When User change the language "English" using filter option
+    Then User finds a different count for the "The Lost World By Arthur Conan Doyle" particular book search

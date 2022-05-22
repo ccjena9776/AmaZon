@@ -35,7 +35,10 @@ public class ElementReader {
 	 public String searchBookList() {
 		 return proElement.getProperty("TotalBooksResult");
 	 }
-	 public String frenchLanguageSearch() {
+	 public String englishLanguageSearch() {
 		 return proElement.getProperty("BookLanguageChangeSearch");
+	 }
+	 public String nextSwitchOption() {
+		 return proElement.getProperty("NextButtonSwitch"); 
 	 }
 }

@@ -1,6 +1,7 @@
 package StepDefinitionDet;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
@@ -87,53 +88,108 @@ public class PageExecution
 		  Assert.assertTrue(searchResultPage.isDisplayed());
 		  ScreenshotUtil.captureScreenShot(driver,"Search result displayed for Books");
 		  
-		  ArrayList<String> lostWorldCount = new ArrayList<String>();
+		  ArrayList<String> totalBooksCount = new ArrayList<String>();
 		  List<WebElement> bookList = driver.findElements(By.xpath(elements.searchBookList()));
 		  
 		    for(WebElement eleBook : bookList) {
-		    	String altTextVerification=eleBook.getAttribute("alt");
-		    	
-		    	if(altTextVerification.contains("The Lost World")) {
-		    		lostWorldCount.add(altTextVerification);
-		    	}
+		    	String altTextVerification=eleBook.getText(); 
+		    	totalBooksCount.add(altTextVerification);		    	
 		    }
 		    
-		 int actualCountOnLoad = bookList.size();
-		 System.out.println(actualCountOnLoad);
-		 int countWithperticularName = lostWorldCount.size();
+		 int countWithperticularName = totalBooksCount.size();
 		 System.out.println(countWithperticularName);
 		 
-		 Assert.assertTrue(countWithperticularName < actualCountOnLoad);
 		  Thread.sleep(500);
 	}
 	@When("User change the language {string} using filter option")
 	public void user_change_the_language_using_filter_option(String BookLanguage)throws Throwable  {
-		  WebElement frenchBookSearch = driver.findElement(By.xpath(elements.frenchLanguageSearch()));
+		  WebElement englishBookSearch = driver.findElement(By.xpath(elements.englishLanguageSearch()));
 	               
 		  Actions builder = new Actions(driver);
-	      builder.moveToElement(frenchBookSearch).click(frenchBookSearch);
-	      ScreenshotUtil.captureScreenShot(driver,"French Language clicked");
+	      builder.moveToElement(englishBookSearch).click(englishBookSearch);
+	      Thread.sleep(500);
+	      ScreenshotUtil.captureScreenShot(driver,"English Language clicked");
 	   	  builder.perform();
 	      Thread.sleep(1000);	          
 	}
 
-	@Then("User finds a different count for that particular book search")
-	public void user_finds_a_different_count_for_that_particular_book_search() {
+	@Then("User finds a different count for the {string} particular book search")
+	public void user_finds_a_different_count_for_the_particular_book_search(String perticularBookName) throws Exception {
 		
-		ArrayList<String> lostWorldFrenchCount = new ArrayList<String>();
-		  List<WebElement> frenchBookList = driver.findElements(By.xpath(elements.searchBookList()));
-		  
-		    for(WebElement eleBook : frenchBookList) {
-		    	String altTextVerification=eleBook.getAttribute("alt");
-		    	lostWorldFrenchCount.add(altTextVerification);
-		 }
-		    
-		 int actualCountforFrench = lostWorldFrenchCount.size();
-		 System.out.println(actualCountforFrench);
-		 ScreenshotUtil.captureScreenShot(driver,"French version Books searched");
+		Actions builder = new Actions(driver);
+		WebElement nextButtonClick = null ;
 		 
-		driver.quit();
+		List<String> lostWorldBookCount = new ArrayList<String>();
+		  List<WebElement> lostWorldBookList = driver.findElements(By.xpath(elements.searchBookList()));
+		  
+		/*1 /* for(WebElement eleBook : lostWorldBookList) {  	    	
+  	    	String actualTextVerification=eleBook.getText();
+  	    	if(actualTextVerification.toLowerCase().contains(perticularBookName.toLowerCase())) {  				
+  				lostWorldBookCount.add(actualTextVerification);  				
+  			 }
+  	       }*/	
+		  
+		  
+		/*2 /*  ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		  
+		  for(int i=0 ; i<= 23 ; i++) {
+			  driver.switchTo().window(tabs.get(i));
+			  Thread.sleep(1000);
+			  
+			  for(WebElement eleBook : lostWorldBookList) { 
+				 
+				  Thread.sleep(2000);
+		  	    	String actualTextVerification=eleBook.getText();
+		  	    	if(actualTextVerification.toLowerCase().contains(perticularBookName.toLowerCase())) {  				
+		  				lostWorldBookCount.add(actualTextVerification);  				
+		  			 }
+		  	       } 
+			  
+		    	nextButtonClick= driver.findElement(By.xpath(elements.nextSwitchOption()));
+		    	builder.moveToElement(nextButtonClick);
+		    		nextButtonClick.click();
+		    	  	Thread.sleep(1000);
+		    	  	driver.navigate().refresh();
+		    	  	Thread.sleep(1000);		    	  		    	   
+			  }*/
+		  
+		  
+		 /*3 /* for(int i=0 ; i<= lostWorldBookList.size(); i++) {
+			  
+			  nextButtonClick = driver.findElement(By.xpath(elements.nextSwitchOption()));
+			  
+	    	builder.moveToElement(nextButtonClick);
+	    	if(nextButtonClick.isDisplayed()) {
+	    		nextButtonClick.click();
+	    	  	Thread.sleep(1000);
+	    	  	driver.navigate().refresh();
+	    	  	Thread.sleep(1000);	
+	    	  }
+	    	
+	    	else	    		
+	    		  driver.quit();
+		    }*/ 
+	    	
+		  for(WebElement eleBook : lostWorldBookList) {  	    	
+	  	    	String actualTextVerification=eleBook.getText();
+	  	    	if(actualTextVerification.toLowerCase().contains(perticularBookName.toLowerCase())) {  	
+	  	    		
+	  	    		if(actualTextVerification.length() < 70) {
+	  	    			
+	  	    		System.out.println(actualTextVerification.length());
+	  				lostWorldBookCount.add(actualTextVerification);  	
+	  	    		}
+	  			 }
+	  	       }
+		  
+		  System.out.println(lostWorldBookCount);
+		  driver.quit();
+		  
+	// NOTES :-
+    // For No.- 1, it's fetching the required book names only from first page. .
+	// For No.- 2, it's fetching text for required books from first page, going to next page, but there I am getting "StaleElementReference" exception. Script not working.
+    // For No.-	3, It's going to each page, but not able to fetch book names from the page.
+	// Last one is there only for first page, fetching book names, filtering particular ones and measuring the book name length. 	  
+		  
 	}
-
-
 }
